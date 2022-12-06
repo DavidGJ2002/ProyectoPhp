@@ -33,15 +33,18 @@ class SessionControl {
     }
 
     public static function checkSession() {
-        if ((self::get("CREATED") == false) || time() - self::get("CREATED") > 60) {
+        if ((self::get("CREATED") == false) || time() - self::get("CREATED") > 60*5) {
             self::destroy();
-            //header("Location:test.php");
+            header("Location:../index.php");
         }
     }
 
     public static function testSession() {
         session_start();
-        if (!self::get("CREATED")) {
+        if (!self::get("USUARIO")) {
+            header("Location:../index.php");
+            
+        } else if (!self::get("CREATED")) {
             self::set("CREATED", time());
         }     
     }
