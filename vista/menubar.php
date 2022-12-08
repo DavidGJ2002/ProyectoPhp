@@ -7,7 +7,7 @@
             </li>
             <?php
             if ($usuario->getRol() == 'administrador') {
-                echo "<li><a href=''><span>Peliculas</span></a></li> ";
+                echo "<li><a href='pelicula.php'><span>Peliculas</span></a></li> ";
                 echo "<li><a href='genero.php'><span>Genero</span></a></li>";
                 echo "<li><a href=''><span>Ventas</span></a></li>";
                 echo "<li><a href=''><span>Entradas</span></a></li>";

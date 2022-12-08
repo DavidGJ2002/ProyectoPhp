@@ -2,7 +2,7 @@
 require_once("inicio.php");
 require_once(__ROOT__ . "/control/SessionControl.php");
 require_once(__ROOT__ . "/modelo/UsuarioModelo.php");
-require_once(__ROOT__ . "/control/GeneroControl.php");
+require_once(__ROOT__ . "/control/PeliculaControl.php");
 SessionControl::testSession();
 SessionControl::checkSession();
 
@@ -15,8 +15,10 @@ if ($usuario->getRol() != 'administrador') {
 
 
 
-$control = new GeneroControl();
-$catalogo = $control->getCatalogoGenero();
+$control = new PeliculaControl();
+$catalogo = $control->getCatalogoPelicula();
+$catalogoSop = $control->getCatalogoSoporte();
+$catalogoGen = $control->getCatalogoGenero();
 
 $control->createOrUpdate();
 ?>
@@ -28,7 +30,7 @@ $control->createOrUpdate();
         <link href="css/master.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" type="text/css" href="css/menu.css" media="all">
         <link rel="stylesheet" type="text/css" href="css/login.css" media="all">
-        <script src="js/cat_genero.js" defer></script>
+        <script src="js/cat_pelicula.js" defer></script>
     </head>
     <body>
         <div id="wrap">
@@ -48,9 +50,9 @@ $control->createOrUpdate();
                 </div>
                 <?php require_once("menubar.php"); ?>
                 <seccion>
-                    <p class="seccion-titulo">Catálogo de géneros</p> 
+                    <p class="seccion-titulo">Catálogo de peliculas</p> 
 
-                    <?php $control->printCatalogo($catalogo); ?>
+                    <?php $control->printPelicula($catalogo); ?>
 
                     <div id="login" class="center">
                         <h2>Operaciones</h2>
@@ -59,13 +61,18 @@ $control->createOrUpdate();
                             <input type="button" id="modificar" value="Modificar">
                         </p> 
                         <form action="" method="post">
-                            <input type="hidden" value="" id="idgenero" name="idgenero">
+                            <input type="hidden" value="" id="idpelicula" name="idpelicula">
                             <label>Nombre :</label>
-                            <input id="nombre" name="nombre" placeholder="Nombre del género" type="text" disabled>
-                            <label>Descripción :</label>
-
-                            <input id="descripcion" name="descripcion" placeholder="Descripción del genero" type="text" disabled>
-                            <input name="submit" type="submit" value=" Guardar ">
+                            <input id="titulo" name="titulo" placeholder="Nombre de la pelicula" type="text" disabled>
+                            <label>Soporte :</label>
+                            <?php $control->printSoporte($catalogoSop); ?>
+                            <input type="hidden" value="" id="idsoporte" name="idsoporte">
+                            <input id="soporte" name="soporte" placeholder="Soporte de pelicula" type="text" disabled>
+                            <label>Genero :</label>
+                            <?php $control->printGenero($catalogoGen); ?>
+                            <input type="hidden" value="" id="idgenero" name="idgenero">
+                            <input id="genero" name="genero" placeholder="Genero de pelicula" type="text" disabled>
+                            <input id="guarda" name="submit" type="submit" value=" Guardar " disabled>
                         </form>
                     </div>
 

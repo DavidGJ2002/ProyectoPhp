@@ -1,20 +1,20 @@
 <?php
 
 require_once(__ROOT__ . "/db/Conexion.php");
-require_once(__ROOT__ . "/modelo/GeneroModelo.php");
+require_once(__ROOT__ . "/modelo/SoporteModelo.php");
 
-class GeneroServicio extends Conexion {
+class SoporteServicio extends Conexion {
 
     public function __construct() {
         parent::__construct();
     }
 
-    public function get_genero() {
-        $sql = "SELECT *  FROM GENERO ";
+    public function get_soporte() {
+        $sql = "SELECT *  FROM SOPORTE ";
         $result = $this->_db->query($sql);
         if ($result) {
             $data = [];
-            while ($row = $result->fetch_object('GeneroModelo')) {
+            while ($row = $result->fetch_object('SoporteModelo')) {
                 $data[] = $row;
             }
             return $data;
@@ -23,7 +23,7 @@ class GeneroServicio extends Conexion {
         }
     }
 
-    public function createOrUpdateGenero($idgenero, $nombre, $descripcion) {
+    /*public function createOrUpdateGenero($idgenero, $nombre, $descripcion) {
         $insert = " INSERT INTO genero(nombre, descripcion) VALUES('$nombre','$descripcion')";
         $update = "UPDATE genero SET nombre = '$nombre' , descripcion = '$descripcion' WHERE id = $idgenero";
 
@@ -34,7 +34,7 @@ class GeneroServicio extends Conexion {
         } else {
             die("Error en la ejecución del query: " . print_r($this->_db->error, true));
         }
-    }
+    }*/
 
 }
 
